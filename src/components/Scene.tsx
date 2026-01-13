@@ -1,36 +1,27 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Grid, Environment } from "@react-three/drei";
-import { SplineMover } from "./SplineMover";
+import { Environment, OrbitControls } from "@react-three/drei";
+import { CarModel } from "./CarModel";
 
 export function Scene() {
   return (
     <Canvas
-      camera={{ position: [0, 2.2, 7], fov: 55, near: 0.1, far: 1000 }}
+      camera={{ position: [0, 1.2, 5], fov: 45, near: 0.1, far: 200 }}
       dpr={[1, 2]}
+      gl={{ antialias: true }}
+      style={{ background: "#050508" }}
     >
-      {/* 라이트 */}
+      {/* 기본 라이트 */}
       <ambientLight intensity={0.6} />
-      <directionalLight position={[5, 10, 5]} intensity={0.9} />
+      <directionalLight position={[5, 8, 5]} intensity={1.0} />
+      <directionalLight position={[-5, 4, -3]} intensity={0.6} />
 
-      {/* 바닥 느낌 */}
-      <Grid
-        args={[20, 20]}
-        cellSize={0.5}
-        cellThickness={0.5}
-        sectionSize={2.5}
-        sectionThickness={1}
-        fadeDistance={25}
-        fadeStrength={1}
-        infiniteGrid
-      />
+      {/* 차 모델 */}
+      <CarModel url="/models/kia_stinger.glb" />
 
-      {/* 스플라인 따라 움직이는 오브젝트 */}
-      <SplineMover />
-
-      {/* 환경 */}
+      {/* 배경/반사감(선택) */}
       <Environment preset="city" />
 
-      {/* 카메라 컨트롤(테스트용) */}
+      {/* 테스트용 카메라 컨트롤 (나중에 스크롤 연출할 때 제거 가능) */}
       <OrbitControls enableDamping />
     </Canvas>
   );
