@@ -44,4 +44,4 @@ export function CarModel({ url }: Props) {
 }
 
 // 프리로드
-useGLTF.preload("/models/kia_stinger.glb");
+useGLTF.preload("/models/porsche.glb");
